@@ -5,7 +5,7 @@ import { assets } from '../../assets/assets'
 
 const Login = ({setShowLogin}) => {
 
-    const [currentPage , setCurrentPage] = useState("register")
+    const [currentPage , setCurrentPage] = useState("Login")
     
   return (
     <div className='login'>
