@@ -7,7 +7,7 @@ import foodRouter from "./routes/FoodRoutes.js"
 dotenv.config({path : "./.env"})
 
  
-const app = express() 
+const app = express()  
 
 
 // middlewares
