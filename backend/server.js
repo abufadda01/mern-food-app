@@ -14,6 +14,7 @@ dotenv.config({path : "./.env"})
 const app = express()  
 
 
+// add error handler middleware
 
 // middlewares
 app.use(express.json())
