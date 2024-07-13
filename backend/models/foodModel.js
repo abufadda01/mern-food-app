@@ -18,7 +18,7 @@ const foodSchema = new mongoose.Schema({
         type : String ,
         required : true
     },
-    categorty: {
+    category: {
         type : String ,
         required : true
     },

@@ -3,6 +3,10 @@ import cors from "cors"
 import dotenv from "dotenv"
 import connectDB from "./config/connectDB.js"
 import foodRouter from "./routes/FoodRoutes.js"
+import fs from "fs";
+import path from "path";
+
+const __dirname =  path.resolve()
 
 dotenv.config({path : "./.env"})
 
@@ -10,15 +14,23 @@ dotenv.config({path : "./.env"})
 const app = express()  
 
 
+
 // middlewares
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("uploads"));
+app.use("/images" , express.static("uploads"));
+
+
+const uploadDir = path.join(__dirname , 'uploads');
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+
 
 
 app.use("/api/food" , foodRouter)
-
 
 
 const port = process.env.PORT
