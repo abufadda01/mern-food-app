@@ -40,11 +40,13 @@ const List = () => {
     }
   };
 
+
   const handleNextPage = () => {
     if (page < totalPages) {
       setPage(page + 1);
     }
   };
+
 
   useEffect(() => {
     getFoodItems()
