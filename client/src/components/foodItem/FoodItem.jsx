@@ -13,12 +13,13 @@ const FoodItem = ({foodItem}) => {
 
     const [itemCount , setItemCount] = useState(0)
 
+
     return (
     <div className='food-item'>
 
         <div className='food-item-img-container'>
             
-            <img className='food-item-image' src={image} alt="" />
+            <img className='food-item-image' src={`http://localhost:5000/images/${foodItem?.image}`} alt="" />
             
             {
                 !cartItems[_id] 

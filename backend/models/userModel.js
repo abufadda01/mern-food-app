@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type : String ,
         required : true ,
+        select : false
     },
     cartData: {
         type : Object ,
@@ -41,8 +42,8 @@ userSchema.pre("save" , async function(next) {
 
 
 
-userSchema.methods.signJWT = function(next) {
-    return jwt.sign({})
+userSchema.methods.signJWT = function() {
+    return jwt.sign({id : this._id} , process.env.JWT_SECRET , {expiresIn : process.env.JWT_EXPIRE})
 }
 
 
