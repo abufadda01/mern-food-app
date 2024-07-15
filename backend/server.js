@@ -6,6 +6,7 @@ import connectDB from "./config/connectDB.js"
 import foodRouter from "./routes/FoodRoutes.js"
 import userRouter from "./routes/userRoutes.js"
 import cartRouter from "./routes/cartRoutes.js"
+import orderRouter from "./routes/orderRoutes.js"
 
 import fs from "fs";
 import path from "path";
@@ -39,6 +40,7 @@ if (!fs.existsSync(uploadDir)) {
 app.use("/api/food" , foodRouter)
 app.use("/api/user" , userRouter)
 app.use("/api/cart" , cartRouter)
+app.use("/api/order" , orderRouter)
 
 
 

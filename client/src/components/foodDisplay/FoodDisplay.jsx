@@ -31,7 +31,9 @@ const FoodDisplay = ({ category }) => {
 
     return (
         <div className='food-display'>
+
             <h2>Top Dishes near you</h2>
+
             <div className='food-display-list'>
                 {foodList.map((foodItem, index) => {
                     if (category === "All" || category === foodItem.category) {
@@ -39,11 +41,13 @@ const FoodDisplay = ({ category }) => {
                     }
                 })}
             </div>
+
             <div className='pagination-controls'>
                 <button onClick={handlePreviousPage} disabled={page === 1}>Previous</button>
                 <span>Page {page} of {totalPages}</span>
                 <button onClick={handleNextPage} disabled={page === totalPages}>Next</button>
             </div>
+            
         </div>
     )
 }

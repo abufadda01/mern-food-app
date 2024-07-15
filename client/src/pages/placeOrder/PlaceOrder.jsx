@@ -1,41 +1,102 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./place-order.css"
 import { useStoreContext } from '../../context/StoreContext'
+import { axiosObj } from '../../utils/axios'
 
 
 
 const PlaceOrder = () => {
 
-  const { getTotalCartAmount} = useStoreContext()
+  const { getTotalCartAmount , token , cartItems , foodList} = useStoreContext()
+
+  const [data , setData] = useState({
+    firstName : "" ,
+    lastName : "" ,
+    email : "" ,
+    street : "" ,
+    city : "" ,
+    state : "" ,
+    zipcode : "" ,
+    country : "" ,
+    phone : ""
+  })
+
+  
+
+  const handleChange = e => {
+    setData({...data , [e.target.name] : e.target.value})
+  }
+
+
+
+
+  const placeOrder = async (e) => {
+  
+    e.preventDefault();
+
+      let orderItems = [];
+
+      foodList?.forEach((item) => {
+
+        if (cartItems[item?._id] > 0) {
+
+          let itemInfo = {
+            ...item,
+            quantity: cartItems[item._id]
+          };
+
+          orderItems.push(itemInfo);
+
+        }
+
+      });
+
+      let orderData = {
+        address : data ,
+        items : orderItems ,
+        amount : getTotalCartAmount() + 2
+      }
+
+      const response = await axiosObj.post("/order/place" , orderData , {
+        headers : {
+          "Authorization" : `Bearer ${token}`
+        }
+      })
+
+      const {session_url} = response.data
+      window.location.replace(session_url)
+
+  };
+
+
 
 
   return (
-    <form className='place-order'>
+    <form onSubmit={placeOrder} className='place-order'>
         
         <div className='place-order-left'>
 
           <p className='title'>Delivery Information</p>
 
           <div className='multi-fields'>
-            <input type="text" placeholder='First Name' />
-            <input type="text" placeholder='Last Name' />
+            <input name='firstName' value={data.firstName} onChange={handleChange} type="text" placeholder='First Name' />
+            <input name='lastName' value={data.lastName} onChange={handleChange} type="text" placeholder='Last Name' />
           </div>
 
-          <input type="email" placeholder='name@example.com' />
-          <input type="text" placeholder='+962' />
+          <input name='email' onChange={handleChange} value={data.email} type="email" placeholder='name@example.com' />
+          <input name='phone' onChange={handleChange} value={data.phone} type="text" placeholder='+962' />
 
-            <input type="text" placeholder='Country' />
+          <input onChange={handleChange} name='country' value={data.country} type="text" placeholder='Country' />
 
           <div className='multi-fields'>
-            <input type="text" placeholder='City' />
-          <input type="text" placeholder='Street' />
+            <input name='city' onChange={handleChange} value={data.city} type="text" placeholder='City' />
+            <input name='street' onChange={handleChange} type="text" value={data.street} placeholder='Street' />
           </div>
 
           <div className='multi-fields'>
-            <input type="text" placeholder='State' />
-            <input type="text" placeholder='Zip code' />
+            <input name='state' onChange={handleChange} value={data.state} type="text" placeholder='State' />
+            <input name='zipcode' onChange={handleChange} type="text" value={data.zipcode} placeholder='Zip code' />
           </div>
-
 
         </div>
 
