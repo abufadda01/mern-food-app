@@ -29,21 +29,22 @@ const Cart = () => {
         <br />
         <hr />
 
-        {foodList.map((item , index) => {
 
-          if(cartItems[item._id]){
+        {foodList?.map((item , index) => {
+
+          if(cartItems[item?._id]){
 
             return (
-              <div key={item._id}>
+              <div key={item?._id}>
 
                 <div className='cart-items-title cart-items-item'>
-                    <img src={`http://localhost:5000/images/${item.image}`} alt="" />
-                    <p>{item.name}</p>
-                    <p>${item.price}</p>
+                    <img src={`http://localhost:5000/images/${item?.image}`} alt="" />
+                    <p>{item?.name}</p>
+                    <p>${item?.price}</p>
                     {/* item quantity */}
-                    <p>{cartItems[item._id]}</p> 
-                    <p>${item.price * cartItems[item._id]}</p>
-                    <img onClick={() => removeFromCart(item._id)} className='remove-icon' src={assets.remove_icon_red} alt="" /> 
+                    <p>{cartItems[item?._id]}</p> 
+                    <p>${item?.price * cartItems[item?._id]}</p>
+                    <img onClick={() => removeFromCart(item?._id)} className='remove-icon' src={assets.remove_icon_red} alt="" /> 
                 </div>
 
                 <hr />

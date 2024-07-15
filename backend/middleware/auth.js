@@ -13,13 +13,16 @@ const auth = async (req , res , next) => {
         }
     
         if(!token){
-            return next(createError("Not authorized to access this route" , 401))
+            return res.status(401).json({msg : "Not authorized to access this route"})
+            // next(createError("Not authorized to access this route" , 401))
         }
     
         jwt.verify(token , process.env.JWT_SECRET , async (err , decodedToken) => {
     
             if(err){
-                return next(createError("Access Forbidden" , 403)) 
+                return res.status(403).json({msg : "Access Forbidden"})
+
+                // next(createError("Access Forbidden" , 403)) 
             }
     
             // create a req key called user , contain the id for logged user
@@ -30,7 +33,7 @@ const auth = async (req , res , next) => {
         })
     
     } catch (error) {
-        nexy(error)    
+        next(error)    
     }
     
 }
