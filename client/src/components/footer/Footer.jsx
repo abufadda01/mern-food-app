@@ -3,14 +3,22 @@ import "./footer.css"
 import { assets } from '../../assets/assets'
 
 
+
 export const Footer = () => {
+
+
+    const handleScrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+
   return (
     <div className='footer' id='footer'>
 
         <div className="footer-content">
         
             <div className="footer-content-left">
-
+                
                 <img src={assets.logo} alt="" />
 
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br /> Ipsam, illo facere eaque pariatur quisquam laudantium numquam deserunt et. Illum, ipsum?</p>
@@ -54,6 +62,8 @@ export const Footer = () => {
         </div>
 
         <hr />
+
+        <button className='scroll-to-top' onClick={handleScrollToTop}>Back to top</button>
 
         <p className='footer-copyright'>Copyright 2024 &copy; Tomato.com</p>
 

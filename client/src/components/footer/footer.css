@@ -52,6 +52,21 @@
     font-size: 1.3vw;
 }
 
+.scroll-to-top {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.scroll-to-top:hover {
+    background-color: #0056b3;
+}
 
 @media(max-width : 750px){
     .footer-content{

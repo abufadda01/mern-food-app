@@ -32,8 +32,15 @@ const MyOrders = () => {
 
 
     useEffect(() => {
-        getUserOrders()
-    } , [page , token])
+        getUserOrders();
+    }, [page, token]);
+
+
+
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+    };
+
 
 
 
@@ -71,6 +78,20 @@ const MyOrders = () => {
                     </div>
 
             ))}
+
+        </div>
+
+        <div className="pagination">
+
+            <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
+                Previous
+            </button>
+
+            <span>Page {page} of {totalPages}</span>
+
+            <button onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
+                Next
+            </button>
 
         </div>
 
