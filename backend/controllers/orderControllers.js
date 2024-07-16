@@ -12,7 +12,7 @@ const placeOrder = async (req , res , next) => {
 
     try {
         
-        const front_end_url = "http://localhost:5173"
+        const front_end_url = "http://localhost:3000"
 
         const {items , amount , address} = req.body
 
@@ -73,6 +73,7 @@ const placeOrder = async (req , res , next) => {
 const verifyOrder = async (req , res , next) => {
 
     try {
+
         const {orderId , success} = req.body
 
         if(success === "true"){
@@ -148,8 +149,20 @@ const getAllOrders = async (req , res , next) => {
 }
 
 
- 
+  
+
+
+const updateOrderStatus = async (req , res , next) => {
+    try {
+        const order = await Order.findByIdAndUpdate(req.body.orderId , {status : req.body.status} , {new : true})
+        res.status(200).json(order)
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 
-export {placeOrder , verifyOrder , getUserOrders , getAllOrders}
+
+
+export {placeOrder , verifyOrder , getUserOrders , getAllOrders , updateOrderStatus}

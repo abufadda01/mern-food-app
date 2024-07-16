@@ -12,6 +12,7 @@ const Orders = () => {
   const [orders , setOrders] = useState([])
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
+  const [orderStatus , setOrderStatus] = useState("")
 
 
   const getUsersOrders = async (e) => {
@@ -40,6 +41,17 @@ const Orders = () => {
     setPage(newPage);
   };
 
+
+
+  const handleChange = async (e , orderId) => {
+    try {
+      await axiosObj.post("/order/update/admin" , {orderId , status : e.target.value})
+      await getUsersOrders()
+      toast.info(`Order status updated`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
 
@@ -83,7 +95,8 @@ const Orders = () => {
             <p>num of items : {order.items.length}</p>
             <p>${order.amount}.00</p>
 
-            <select>
+            {/* invoke the api call on handlechange to not use any buttons , directly change order status after choose one of the options */}
+            <select onChange={(e) => handleChange(e , order?._id)} value={order.status}>
               <option value="Food Processing">Food Processing</option>
               <option value="Out for delivery">Out for delivery</option>
               <option value="Delivered">Delivered</option>
@@ -93,6 +106,20 @@ const Orders = () => {
 
         ))}
       
+      </div>
+
+      <div className="pagination">
+
+          <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
+              Previous
+          </button>
+
+          <span>Page {page} of {totalPages}</span>
+
+          <button onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
+              Next
+          </button>
+
       </div>
 
     </div>

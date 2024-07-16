@@ -23,7 +23,7 @@ const SideBar = () => {
                 <p>List Items</p>
             </NavLink>
 
-            <NavLink onClick={() => setMenu("orders")} to="/orders" className={`sidebar-option ${menu === "orders" ? "active" : ""}`}>
+            <NavLink onClick={() => setMenu("orders")} to="/" className={`sidebar-option ${menu === "orders" ? "active" : ""}`}>
                 <img src={assets.add_icon} alt="" />
                 <p>Orders</p>
             </NavLink>
